@@ -80,10 +80,10 @@ module Train::Transports
         stdout = read_stdout(session.stdout)
 
         # remove stdin from stdout
-        stdout.slice!(0, cmd.length+2)
+        stdout.slice!(0, cmd.length+1)
 
         # remove prompt from stdout
-        stdout.gsub!(/PS\s.*>$/, '')
+        stdout.gsub!(/PS\s.*> $/, '')
 
         # grab stderr
         stderr = read_stderr(session.stderr)
@@ -113,7 +113,7 @@ module Train::Transports
       end
 
       def read_stdout(pipe)
-        @stdout_buffer += pipe.read_nonblock(1) while @stdout_buffer !~ /PS\s.*>$/
+        @stdout_buffer += pipe.read_nonblock(1) while @stdout_buffer !~ /PS\s.*> $/
         @stdout_buffer
       rescue IO::EAGAINWaitReadable
         retry
@@ -123,7 +123,6 @@ module Train::Transports
 
       def read_stderr(pipe)
         @stderr_buffer += pipe.read_nonblock(1) while true
-        binding.pry
         @stderr_buffer
       rescue IO::EAGAINWaitReadable
         @stderr_buffer
