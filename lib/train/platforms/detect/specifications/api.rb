@@ -8,7 +8,6 @@ module Train::Platforms::Detect::Specifications
       plat.family('api')
 
       plat.family('cloud').in_family('api')
-      plat.name('aws').in_family('cloud')
       plat.name('azure').in_family('cloud')
       plat.name('gcp').in_family('cloud')
       plat.name('vmware').in_family('cloud')

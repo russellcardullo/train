@@ -119,12 +119,6 @@ describe 'uuid' do
     uuid.uuid_from_string('123141dsfadf').must_equal '5e430326-b5aa-56f8-975f-c3ca1c21df91'
   end
 
-  it 'finds a aws uuid' do
-    plat = mock_platform('aws')
-    plat.backend.stubs(:unique_identifier).returns('158551926027')
-    plat.uuid.must_equal '1d74ce61-ac15-5c48-9ee3-5aa8207ac37f'
-  end
-
   it 'finds an azure uuid' do
     plat = mock_platform('azure')
     plat.backend.stubs(:unique_identifier).returns('1d74ce61-ac15-5c48-9ee3-5aa8207ac37f')

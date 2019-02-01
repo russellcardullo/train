@@ -20,7 +20,6 @@ Train supports:
 * WinRM
 * Docker
 * Mock (for testing and debugging)
-* AWS as an API
 * Azure as an API
 * VMware via PowerCLI
 
@@ -63,21 +62,6 @@ train = Train.create('winrm',
 ```ruby
 require 'train'
 train = Train.create('docker', host: 'container_id...')
-```
-
-**AWS**
-
-To use AWS API authentication, setup an AWS client profile to store the Access Key ID and Secret Access Key.
-
-```ruby
-require 'train'
-train = Train.create('aws', region: 'us-east-2', profile: 'my-profile')
-```
-
-You may also use the standard AWS CLI environment variables, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` and `AWS_REGION`.
-```ruby
-require 'train'
-train = Train.create('aws')
 ```
 
 **VMware**
@@ -128,10 +112,6 @@ puts conn.os[:release]
 
 # access files
 puts conn.file('/proc/version').content
-
-# access specific API client functionality
-ec2_client = train.connection.aws_client(Aws::EC2::Client)
-puts ec2_client.describe_instances
 
 # close the connection
 conn.close
